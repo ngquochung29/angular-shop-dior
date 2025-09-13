@@ -6,15 +6,15 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install
 
-# Copy toàn bộ source code và build Angular
+# Copy toàn bộ source code và build Angular (theo cấu hình production mặc định)
 COPY . .
-RUN npm run build --prod
+RUN npm run build -- --configuration production
 
 # Stage 2: Serve bằng Nginx
 FROM nginx:alpine
 
-# Copy file build vào thư mục Nginx
-COPY --from=build /app/dist/fashionshop-frontend /usr/share/nginx/html
+# Copy file build vào thư mục Nginx (dist/myapp theo angular.json)
+COPY --from=build /app/dist/myapp /usr/share/nginx/html
 
 # Copy nginx config để support Angular routing (SPA)
 COPY nginx.conf /etc/nginx/conf.d/default.conf
