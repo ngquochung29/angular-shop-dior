@@ -3,7 +3,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Category } from 'src/app/models/category';
 import { Product } from 'src/app/models/product';
 import { CategoryService } from 'src/app/service/category.service';
+import { FavoriteService } from 'src/app/service/favorite.service';
 import { ProductService } from 'src/app/service/product.service';
+import { ToastService } from 'src/app/service/toast.service';
+import { TokenService } from 'src/app/service/token.service';
+import { any } from 'underscore';
 import {environment} from "../../environments/environment";
 
 @Component({
@@ -28,6 +32,9 @@ export class HomeComponent implements OnInit {
   constructor(
     private productService: ProductService,
     private categoryService: CategoryService,
+    private favoriteService: FavoriteService,
+    private toastService: ToastService,
+    private tokenService: TokenService,
     private router: Router,
     private route: ActivatedRoute
   ) { }
@@ -108,6 +115,37 @@ export class HomeComponent implements OnInit {
     this.currentPage =page;
     this.getProducts(this.keyword, this.selectedCategoryId, this.currentPage, this.itemsPerPage);
   }
+toggleFavorite(productId: number) {
+  const token = this.tokenService.getToken();
+  if (!token) {
+    this.toastService.showToast({
+      error: null,
+      defaultMsg: 'Bạn cần đăng nhập để thêm vào yêu thích',
+      title: 'Chưa đăng nhập',
+    });
+    return;
+  }
+
+  this.favoriteService.addFavoriteByCurrentUser(productId, token).subscribe({
+    next: (res: any) => {
+      this.toastService.showToast({
+        error: null,
+        defaultMsg: 'Đã thêm vào danh sách yêu thích',
+        title: 'Thêm thành công',
+      });
+    },
+    error: (error: any) => {
+      this.toastService.showToast({
+        error,
+        defaultMsg: 'Không thể thêm vào yêu thích',
+        title: 'Lỗi',
+      });
+    }
+  });
+}
+
+
+
 
 generateVisiblePageArray(currentPage: number, totalPages: number): number[] {
   const maxVisible = 5;

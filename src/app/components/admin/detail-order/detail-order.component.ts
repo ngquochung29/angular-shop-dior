@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { OrderResponse } from 'src/app/responses/order.response';
+import { OrderResponse } from 'src/app/responses/order/order.response';
 import { OrderService } from 'src/app/service/order.service';
 import { ToastService } from 'src/app/service/toast.service';
 

@@ -66,8 +66,8 @@
                   {{ user.is_active ? 'Active' : 'Inactive' }}
                 </span>
               </td>
-               <td><span class="badge bg-info text-dark">{{ user.role.name }}</span></td>
-              <td class="text-center">
+             <td><span class="badge text-dark">
+                    {{ roleLabels[user.role.name] || user.role.name }}</span></td>              <td class="text-center">
                 <div class="d-inline-flex align-items-center gap-2">
                   <button class="btn btn-outline-primary btn-sm" (click)="updateEmployee(user.id)">
                     <i class="fa-regular fa-pen-to-square me-1"></i> Cập nhật

@@ -17,7 +17,7 @@
         <ul class="nav flex-column">
           <li class="nav-item">
             <a class="nav-link" (click)="showEmployeeComponent('list-orders')">
-              <i class="fab fa-first-order icon me-2"></i> Hóa đơn
+              <i class="fab fa-first-order icon me-2"></i> Đơn hàng
             </a>
           </li>
           <li class="nav-item">
@@ -30,10 +30,19 @@
               <i class="fa-solid fa-cart-shopping icon me-2"></i> Bán hàng
             </a>
           </li>
+           <li class="nav-item">
+            <a class="nav-link" (click)="showEmployeeComponent('bills')">
+           <i class="fa-solid fa-receipt icon me-2"></i> Hoá đơn
+            </a>
+          </li>
+              <li class="nav-item">
+            <a class="nav-link" (click)="showEmployeeComponent('bills-online')">
+           <i class="fa-solid fa-receipt icon me-2"></i> HĐĐT
+            </a>
+          </li>
         </ul>
       </div>
     </nav>
-
     <div class="col-md-10 col-lg-10 content-wrapper">
       <div class="content-shell shadow-sm">
         <router-outlet></router-outlet>

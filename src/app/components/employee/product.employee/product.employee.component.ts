@@ -19,7 +19,7 @@ export class ProductEmployeeComponent implements OnInit {
   products: Product[]=[];
   selectedCategoryId: number =0;
   currentPage: number =0;
-  itemsPerpage: number =5;
+  itemsPerpage: number =8;
   pages: number[] =[];
   totalPages: number =0;
   visiblePages: number[]=[];
@@ -32,7 +32,7 @@ export class ProductEmployeeComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.currentPage =Number(localStorage.getItem('currentProductAdminPage')) || 0;
+    this.currentPage =Number(localStorage.getItem('currentProductDetailEmployeePage')) || 0;
  this.getProducts(this.keyword,
   this.selectedCategoryId,
   this.currentPage,this.itemsPerpage
@@ -45,6 +45,9 @@ export class ProductEmployeeComponent implements OnInit {
   }
    onProductClick(productId: number){
     this.router.navigate(['/employee/products',productId]);
+  }
+    updateQuantity(productId: number){
+    this.router.navigate(['/employee/products/detail',productId]);
   }
   getProducts(keyword:string, selectedCategoryId:number,page: number,limit: number){
     this.productService.getProductsByActive(keyword,selectedCategoryId,page,limit).subscribe({
@@ -66,7 +69,7 @@ export class ProductEmployeeComponent implements OnInit {
   }
   onPageChange(page: number){
     this.currentPage = page < 0?0:page;
-    localStorage.setItem('currentProductAdminPage',String(this.currentPage));
+    localStorage.setItem('currentProductDetailEmployeePage',String(this.currentPage));
     this.getProducts(this.keyword,this.selectedCategoryId,this.currentPage,this.itemsPerpage);
   }
 

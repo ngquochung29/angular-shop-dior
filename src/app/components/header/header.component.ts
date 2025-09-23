@@ -52,7 +52,7 @@ brands: Brand[]=[];
     if(index ===0){
       this.router.navigate(['/user-profile']);
     }else if(index===1){
-            this.router.navigate(['/orders-history']);
+      this.router.navigate(['/orders-history']);
     }
     else if(index===2){
       this.userService.removeUserFromLocalStorage();

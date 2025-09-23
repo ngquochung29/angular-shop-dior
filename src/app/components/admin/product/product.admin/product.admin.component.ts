@@ -20,7 +20,7 @@ export class ProductAdminComponent implements OnInit {
   products: Product[]=[];
   selectedCategoryId: number =0;
   currentPage: number =0;
-  itemsPerpage: number =5;
+  itemsPerpage: number =8;
   pages: number[] =[];
   totalPages: number =0;
   visiblePages: number[]=[];

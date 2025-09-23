@@ -33,6 +33,12 @@ route = inject(ActivatedRoute);
     this.currentPage = Number(this.localStorage?.getItem('currentUserAdminPage')) || 0;
     this.getUsers(this.keyword, this.currentPage, this.itemsPerPage);
   }
+  roleLabels: Record<string, string> = {
+  ADMIN: 'Quản trị viên',
+  EMPLOYEE: 'Nhân viên',
+  user: 'Khách hàng'
+};
+
   
 
     searchUsers() {

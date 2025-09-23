@@ -1,0 +1,50 @@
+/* nền mờ */
+.popup-backdrop {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,.55);
+  display: grid; place-items: center;
+  z-index: 1000;
+}
+
+/* thẻ modal */
+.popup-card {
+  position: relative;
+  width: min(92vw, 680px);
+  border-radius: 16px;
+  padding: 28px 28px 32px;
+  background: linear-gradient(135deg,#ffffff 0%, #f2f6ff 100%);
+  box-shadow: 0 20px 60px rgba(0,0,0,.2);
+  text-align: center;
+  animation: pop .22s ease-out;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+@keyframes pop { from { transform: translateY(6px) scale(.98); opacity:.6; }
+                 to   { transform: none; opacity:1; } }
+
+.btn-close {
+  position: absolute; right: 14px; top: 12px;
+  border: none; background: transparent; font-size: 28px; line-height: 1;
+  cursor: pointer; color: #6b7280;
+}
+
+.subtitle { letter-spacing: .08em; color: #4661ff; margin: 8px 0 4px; font-weight: 700; }
+.discount { font-size: clamp(56px, 11vw, 120px); font-weight: 800; color: #2b56ff; line-height: 1; }
+
+.coupon {
+  margin: 18px auto 8px; padding: 16px; max-width: 540px;
+  border: 2px solid #2b56ff; border-radius: 12px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 12px; text-align: left;
+}
+.coupon .left .label { font-size: 12px; color: #6b7280; text-transform: uppercase; letter-spacing: .08em; }
+.coupon .left .code { font-size: 22px; font-weight: 800; color: #2b56ff; }
+.coupon .right { font-size: 16px; color: #111827; }
+
+.note { color: #6b7280; margin: 8px 0 16px; font-size: 13px; }
+
+.cta {
+  margin-top: 6px; padding: 12px 20px; border-radius: 999px;
+  border: 0; cursor: pointer; font-weight: 700; font-size: 16px;
+  background: #2b56ff; color: #fff;
+}
+.cta:hover { filter: brightness(1.05); }

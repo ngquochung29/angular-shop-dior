@@ -5,7 +5,7 @@
     <div class="card-body d-flex justify-content-between align-items-center">
       <div class="d-flex align-items-center gap-2">
         <i class="fa-solid fa-file-invoice-dollar fs-3 text-primary"></i>
-        <h1 class="h5 m-0 fw-bold">Thông tin hóa đơn chi tiết</h1>
+        <h1 class="h5 m-0 fw-bold">Thông tin đơn hàng chi tiết</h1>
       </div>
       <span class="badge text-capitalize">{{ orderResponse.status }}</span>
     </div>
@@ -13,7 +13,7 @@
 
   <!-- Thông tin hóa đơn (dọc) -->
   <div class="card border-0 shadow-sm rounded-3 mb-3">
-    <div class="card-header bg-light fw-semibold">Hóa Đơn</div>
+    <div class="card-header bg-light fw-semibold">Đơn hàng</div>
     <div class="card-body">
       <div class="vstack gap-2">
         <div><span class="text-muted small">ID hóa đơn</span><div class="fw-semibold">{{ orderResponse.id }}</div></div>
@@ -37,7 +37,21 @@
             <div class="fw-semibold">{{ orderResponse.delivery_date | date:'dd/MM/yyyy' }}</div>
           </div>
         </div>
-        <div><span class="text-muted small">Hình thức thanh toán</span><div class="fw-semibold">{{ orderResponse.payment_method }}</div></div>
+<div>
+  <span class="text-muted small">Hình thức thanh toán</span>
+  <div class="fw-semibold" [ngSwitch]="(orderResponse.payment_method || '').toLowerCase()">
+    <span *ngSwitchCase="'cod'">Thanh toán khi nhận hàng</span>
+    <span *ngSwitchCase="'money'">Tiền mặt</span>
+    <span *ngSwitchCase="'vnpay'">VNPay</span>
+    <span *ngSwitchDefault>{{ orderResponse.payment_method }}</span>
+  </div>
+</div>
+  <div class="small text-muted">Phương thức vận chuyển</div>
+  <div class="fw-semibold" [ngSwitch]="(orderResponse.shipping_method || '').toLowerCase()">
+    <span *ngSwitchCase="'counter'">Tại quầy</span>
+    <span *ngSwitchCase="'normal'">Giao hàng tiết kiệm</span>
+    <span *ngSwitchCase="'express'">Giao nhanh</span>
+    <span *ngSwitchDefault>{{ orderResponse.shipping_method }}</span>
 
         <!-- Trạng thái (select) -->
         <div class="mt-2">
@@ -47,8 +61,7 @@
             <option value="processing">Đã xác nhận</option>
 
             <option value="out_of_stock_pending">Hết hàng (chờ xác nhận)</option>
-            <option value="waiting_for_stock">Chờ sản phẩm</option>
-
+            <option value="waiting_for_stock">Chờ hàng về</option>
             <option value="shipped">Đang giao hàng</option>
             <option value="refused_on_delivery">Khách không nhận hàng</option>
             <option value="delivered">Đã nhận hàng</option>
@@ -121,5 +134,4 @@
   <div class="text-end">
     <button class="btn btn-primary px-4" (click)="saveOrder()">Save</button>
   </div>
-
 </div>

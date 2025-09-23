@@ -1,19 +1,18 @@
+<app-promo-modal></app-promo-modal>
 <app-header></app-header>
 <app-banner></app-banner>
 <main class="container py-5">
-  <h2 class="text-center mb-4">Danh Mục Sản Phẩm</h2>
+  <h2 class="text-center mb-4">Bộ sưu tập sản phẩm</h2>
 
 <div class="row g-4">
   <div class="col-md-3" *ngFor="let product of products">
     <div class="card h-100 shadow-sm position-relative">
       
       <!-- Icon trái tim góc trên phải -->
-      <button 
-        class="btn btn-light rounded-circle position-absolute top-0 end-0 m-2"
-      >
-        <i class="fa-regular fa-heart"></i>
-        <!-- <i [ngClass]="{'bi-heart-fill text-danger': product.isFavorite, 'bi-heart': !product.isFavorite}" class="bi fs-5"></i> -->
-      </button>
+    <button class="btn btn-light rounded-circle position-absolute top-0 end-0 m-2"
+              (click)="toggleFavorite(product.id)">
+<i class="fa-regular fa-heart"></i>
+  </button>
               <img [src]="product.url" alt="Product Image"
                class="product-image" (click)="onProductClick(product.id)"/>
       <div class="card-body">

@@ -1,0 +1,6 @@
+export interface CouponCondition {
+  attribute: string;       // "minimum_amount" | "productId" | "applicable_date" | ...
+  operator: string;        // ">", ">=", "IN", "BETWEEN", "=" ...
+  value: string;           // "500000" | "1,2,3" | "2025-09-01,2025-09-30"
+  discountAmount: number;  // 10.00 (10%)
+}

@@ -7,29 +7,65 @@
       <h4 class="mb-0 fw-semibold fs-18">Chi tiết đơn hàng</h4>
     </div>
     <hr>
+<!-- Bọc 2 cột thông tin -->
+<div class="order-info-grid mb-3">
+  <!-- Cột trái: giữ nguyên block hiện tại -->
+  <div>
+    <p class="mb-0"><strong>ID Đơn Hàng:</strong> {{orderResponse.id}}</p>
+      <p class="mb-1"><strong>Tên:</strong> {{ orderResponse.fullname }}</p>
+    <p class="mb-1"><strong>Email:</strong> {{ orderResponse.email || '—' }}</p>
+    <p class="mb-1"><strong>SĐT:</strong> {{ orderResponse.phone_number }}</p>
+<p class="mb-1">
+  <strong class="me-1">Thanh toán:</strong>
+  <span class="fw-semibold" [ngSwitch]="(orderResponse.payment_method || '').toLowerCase()">
+    <ng-container *ngSwitchCase="'cod'">COD</ng-container>
+    <ng-container *ngSwitchCase="'money'">Tiền mặt</ng-container>
+    <ng-container *ngSwitchCase="'vnpay'">VNPay</ng-container>
+    <ng-container *ngSwitchDefault>{{ orderResponse.payment_method || '—' }}</ng-container>
+  </span>
+</p>
 
-    <div class="mb-3">
-      <p class="mb-0"><strong>ID Đơn Hàng:</strong> {{orderResponse.id}}</p>
-      <p class="mb-1"><strong>Ngày Đặt Hàng:</strong> {{orderResponse.order_date |date:'dd/MM/yyyy'}}</p>
-      <p class="mb-1"><strong>Ngày Gửi Hàng:</strong> {{orderResponse.shipping_date |date:'dd/MM/yyyy'}}</p>
-      <p class="mb-1"><strong>Ngày Nhận Hàng:</strong> {{orderResponse.delivery_date |date:'dd/MM/yyyy'}}</p>
-      <p class="mb-1"><strong>Trạng Thái Đơn Hàng:</strong> 
-                                  <span class="badge"
-                     [ngClass]="{
-    'bg-secondary': orderResponse.status === 'pending',
-    'bg-primary': orderResponse.status === 'processing',
+    <p class="mb-1">
+      <strong>Trạng Thái Đơn Hàng:</strong>
+      <span class="badge"
+            [ngClass]="{
+              'bg-secondary': orderResponse.status === 'pending',
+              'bg-primary': orderResponse.status === 'processing',
+              'bg-info': orderResponse.status === 'shipped' || orderResponse.status === 'shipping' || orderResponse.status === 'waiting_for_stock',
+              'bg-warning': orderResponse.status === 'out_of_stock_pending',
+              'text-dark': orderResponse.status === 'shipped' || orderResponse.status === 'shipping' || 
+                            orderResponse.status === 'waiting_for_stock' || orderResponse.status === 'out_of_stock_pending',
+              'bg-success': orderResponse.status === 'delivered',
+              'bg-danger': orderResponse.status === 'cancelled' || orderResponse.status === 'cancelled_out_of_stock',
+              'bg-dark': orderResponse.status === 'refused_on_delivery'
+            }">
+        <div class="fw-semibold" [ngSwitch]="orderResponse.status">
+          <span *ngSwitchCase="'pending'">Chờ xác nhận</span>
+          <span *ngSwitchCase="'processing'">Đang xử lý</span>
+          <span *ngSwitchCase="'shipped'">Đã gửi hàng</span>
+          <span *ngSwitchCase="'shipping'">Đang giao</span>
+          <span *ngSwitchCase="'waiting_for_stock'">Chờ nhập hàng</span>
+          <span *ngSwitchCase="'out_of_stock_pending'">Tạm hết hàng</span>
+          <span *ngSwitchCase="'delivered'">Đã nhận hàng</span>
+          <span *ngSwitchCase="'cancelled'">Đã hủy</span>
+          <span *ngSwitchCase="'cancelled_out_of_stock'">Hủy do hết hàng</span>
+          <span *ngSwitchCase="'refused_on_delivery'">Từ chối nhận</span>
+          <span *ngSwitchDefault>{{ orderResponse.status | titlecase }}</span>
+        </div>
+      </span>
+    </p>
+  </div>
 
-    'bg-info': orderResponse.status === 'shipped' || orderResponse.status === 'shipping' || orderResponse.status === 'waiting_for_stock',
-    'bg-warning': orderResponse.status === 'out_of_stock_pending',
-    'text-dark': orderResponse.status === 'shipped' || orderResponse.status === 'shipping' || 
-                 orderResponse.status === 'waiting_for_stock' || orderResponse.status === 'out_of_stock_pending',
-
-    'bg-success': orderResponse.status === 'delivered',
-    'bg-danger': orderResponse.status === 'cancelled' || orderResponse.status === 'cancelled_out_of_stock',
-    'bg-dark': orderResponse.status === 'refused_on_delivery'
-  }">
-          {{orderResponse.status}}</span></p>
-    </div>
+  <!-- Cột phải: block mới -->
+  <div class="order-info-right">
+     <p class="mb-1"><strong>Ngày Đặt Hàng:</strong> {{orderResponse.order_date | date:'dd/MM/yyyy'}}</p>
+    <p class="mb-1"><strong>Ngày Gửi Hàng:</strong> {{orderResponse.shipping_date | date:'dd/MM/yyyy'}}</p>
+    <p class="mb-1"><strong>Ngày Nhận Hàng:</strong> {{orderResponse.delivery_date | date:'dd/MM/yyyy'}}</p>
+    <p class="mb-1"><strong>Vận chuyển:</strong> {{ shippingLabel || orderResponse.shipping_method }}</p>
+    <p class="mb-1"><strong>Địa chỉ giao:</strong> {{ orderResponse.shipping_address }}</p>
+        <p class="mb-1"><strong>Ghi chú:</strong> {{ orderResponse.note }}</p>
+  </div>
+</div>
 
     <div class="table-responsive rounded-2 mt-4">
       <table class="table  border rounded-2 order-table">

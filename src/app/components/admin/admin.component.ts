@@ -42,6 +42,8 @@ if(componentName =='orders'){
   this.router.navigate(['/admin/products']);
 }else if (componentName == 'users') {
   this.router.navigate(['/admin/users']);
+    }else if (componentName == 'coupons') {
+  this.router.navigate(['/admin/coupons']);
     }else if (componentName == 'brands') {
   this.router.navigate(['/admin/brands']);
     }else if (componentName == 'styles') {
@@ -58,6 +60,8 @@ if(componentName =='orders'){
   this.router.navigate(['/admin/employees']);
     }else if (componentName == 'statisticals') {
   this.router.navigate(['/admin/statisticals']);
+    }else if (componentName == 'bills') {
+  this.router.navigate(['/admin/bills']);
     }
     
 }

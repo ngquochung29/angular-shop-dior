@@ -88,3 +88,153 @@
 /* Màu ví dụ (tuỳ chọn) */
 .role-fill.user{ background: #6d92dd; }  /* khách hàng */
 .role-fill.emp{  background: #09b364; }  /* nhân viên  */
+
+
+
+/* Biểu đồ cột dọc */
+.vchart {
+  display: grid;
+  grid-template-columns: 50px 1fr; /* cột thước Y + vùng cột */
+  gap: 12px;
+  min-height: 320px;
+}
+
+/* Thước Y (nhãn %) */
+.vchart-y {
+  display: grid;
+  grid-template-rows: repeat(5, 1fr);
+  align-items: center;
+  justify-items: end;
+  font-size: 12px;
+  color: #6b7280;
+}
+.vchart-y .tick { height: 100%; display: flex; align-items: center; }
+
+/* Vùng vẽ cột – khóa chiều cao để cột không làm vỡ layout */
+.vchart-plot {
+  position: relative;
+  height: 340px;        /* cố định chiều cao khung chart */
+  overflow: hidden;     /* tránh cột vượt ra ngoài */
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 8px 8px 16px;
+}
+
+/* Lưới ngang 0/25/50/75/100% */
+.vchart-plot .grid-lines {
+  position: absolute;
+  inset: 8px 8px 24px 8px;
+  background:
+    linear-gradient(to bottom, rgba(0,0,0,0.08) 1px, transparent 1px) 0 0 / 100% calc(25% - 1px),
+    linear-gradient(to bottom, rgba(0,0,0,0.10) 1px, transparent 1px) 0 0 / 100% 100%;
+  pointer-events: none;
+}
+
+/* 12 cột tháng */
+.vcols {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  align-items: end;
+  gap: 10px;
+  height: 100%;
+}
+// .vcol {
+//   display: grid;
+//   grid-template-rows: 1fr auto; /* bar + label tháng */
+//   gap: 6px;
+//   min-width: 18px;
+// }
+
+/* Cột – chiều cao lấy từ [style.height]="widthPercent(t)" */
+.bar {
+  position: relative;
+  height: 0;            /* sẽ bị override bởi inline style */
+  min-height: 2px;      /* tháng = 0 vẫn có vệt nhỏ */
+  background: linear-gradient(180deg, #2b56ff, #4661ff);
+  border-radius: 6px 6px 0 0;
+  box-shadow: 0 6px 16px rgba(43,86,255,0.25);
+  transition: height .25s ease, filter .15s ease;
+}
+.bar:hover { filter: brightness(1.06); }
+
+/* Giá trị tiền trên đầu cột */
+.bar-value {
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 11px;
+  color: #111827;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  padding: 2px 6px;
+  border-radius: 4px;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+/* Nhãn tháng */
+.vcol-label {
+  text-align: center;
+  font-size: 12px;
+  color: #374151;
+}
+  /* ==== Overrides cho biểu đồ cột dọc ==== */
+
+/* 1) Cho card biểu đồ dùng FULL chiều rộng, bỏ giới hạn 760px của các panel khác */
+.panel-section:has(.vchart) { max-width: none; }
+
+/* 2) Chừa khoảng trống phía trên để .bar-value không bị overflow bị ẩn */
+.vchart-plot {
+  height: 360px;           /* tăng nhẹ chiều cao khung */
+  padding: 20px 8px 24px;  /* chừa thêm top padding cho label tiền */
+}
+.vchart-plot .grid-lines {
+  inset: 20px 8px 32px 8px; /* đồng bộ với padding mới */
+}
+
+/* 3) Cải thiện hiển thị trên màn nhỏ */
+@media (max-width: 900px) {
+  .vcols { grid-template-columns: repeat(12, minmax(10px, 1fr)); gap: 8px; }
+  .vcol-label { font-size: 11px; transform: rotate(-30deg); transform-origin: top right; line-height: 1; }
+  .vchart-plot { height: 300px; }
+}
+@media (max-width: 520px) {
+  .vcols { gap: 6px; }
+  .vcol-label { font-size: 10px; transform: rotate(-45deg); }
+  .vchart-plot { height: 260px; }
+}
+
+/* 4) Tắt animation nếu người dùng chọn giảm chuyển động */
+@media (prefers-reduced-motion: reduce) {
+  .bar { transition: none; }
+}
+.vcol { 
+  display: flex;                 /* thay vì grid cho phần trên */
+  flex-direction: column;
+  justify-content: flex-end;     /* đáy cột bám đáy khung */
+}
+
+.vcol-label { margin-top: 6px; } /* giữ label nằm dưới */
+.vcol  { height: 98%; } 
+
+/* Fix cứng chiều ngang thanh cột */
+.vchart .bar {
+  width: 50px;        /* cố định 14px */
+  margin: 0 auto;     /* căn giữa đề phòng */
+}
+
+/* Căn giữa cột trong ô và bám đáy */
+.bar-box{
+  height: 100%;
+  display: flex;
+  align-items: flex-end;   /* bám đáy */
+  justify-content: center; /* căn giữa ngang */
+}
+
+/* (tuỳ chọn) giảm khoảng cách giữa các cột nếu muốn */
+.vcols { gap: 5px; }
+
+

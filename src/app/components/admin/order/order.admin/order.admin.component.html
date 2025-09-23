@@ -3,7 +3,7 @@
   <div class="d-flex align-items-center justify-content-between page-heading bg-white px-3 py-3 border-bottom">
     <div class="d-flex align-items-center gap-2">
       <i class="fa-solid fa-file-invoice fs-4 text-primary"></i>
-      <h1 class="h5 m-0 fw-bold">Trang danh sách hóa đơn</h1>
+      <h1 class="h5 m-0 fw-bold">Trang danh sách đơn hàng</h1>
     </div>
   </div>
 
@@ -17,10 +17,9 @@
         <input
           type="text"
           class="form-control search-input border-start-0"
-          placeholder="Tìm sản phẩm"
+          placeholder="Tìm đơn hàng"
           [(ngModel)]="keyword"
-          (keyup.enter)="searchOrders()"
-        />
+          (keyup.enter)="searchOrders()"/>
       </div>
     </div>
     <div class="col-md-4 text-md-start text-end">
@@ -42,14 +41,9 @@
                 <th class="text-nowrap">Tên</th>
                 <th class="text-nowrap">Email</th>
                 <th class="text-nowrap">SĐT</th>
-                <th class="text-nowrap">Địa chỉ</th>
-                <th class="text-nowrap">Note</th>
                 <th class="text-nowrap">Ngày đặt</th>
-                <th class="text-nowrap">Status</th>
+                <th class="text-nowrap">Trạng thái</th>
                 <th class="text-nowrap">Giá</th>
-                <th class="text-nowrap">Shipped</th>
-                <th class="text-nowrap">Địa chỉ nhận</th>
-                <th class="text-nowrap">Ngày gửi</th>
                 <th class="text-nowrap">Thanh toán</th>
                 <th class="text-nowrap text-center">Hành động</th>
               </tr>
@@ -60,8 +54,6 @@
                 <td class="text-truncate" style="max-width: 160px">{{ order.fullname }}</td>
                 <td class="text-truncate" style="max-width: 200px">{{ order.email }}</td>
                 <td class="text-nowrap">{{ order.phone_number }}</td>
-                <td class="text-truncate" style="max-width: 220px">{{ order.address }}</td>
-                <td class="text-truncate" style="max-width: 180px">{{ order.note }}</td>
                 <td class="text-nowrap">{{ order.order_date | date : "dd/MM/yyyy" }}</td>
                 <td>
                   <span
@@ -87,9 +79,6 @@
                   </span>
                 </td>
                 <td class="text-nowrap fw-semibold">{{ order.total_money }} đ</td>
-                <td class="text-truncate" style="max-width: 140px">{{ order.shipping_method }}</td>
-                <td class="text-truncate" style="max-width: 220px">{{ order.shipping_address }}</td>
-                <td class="text-nowrap">{{ order.shipping_date | date : "dd/MM/yyyy" }}</td>
                 <td class="text-truncate" style="max-width: 140px">{{ order.payment_method }}</td>
                 <td class="text-center">
                   <button (click)="viewDetails(order)" class="btn btn-outline-primary btn-sm">

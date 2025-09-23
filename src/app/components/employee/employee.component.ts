@@ -39,5 +39,9 @@ if(componentName =='products'){
   this.router.navigate(['/employee/orders']);
 }else if(componentName=='list-orders'){
   this.router.navigate(['/employee/list-orders']);
+}else if(componentName=='bills'){
+  this.router.navigate(['/employee/bills']);
+}else if(componentName=='bills-online'){
+  this.router.navigate(['/employee/bills-online']);
 }
 }}

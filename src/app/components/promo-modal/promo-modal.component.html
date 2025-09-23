@@ -1,0 +1,24 @@
+<!-- Chỉ render khi mở -->
+<div *ngIf="isOpen" class="popup-backdrop" (click)="onBackdropClick($event)">
+  <div class="popup-card" role="dialog" aria-modal="true" aria-label="Khuyến mãi">
+    <button class="btn-close" (click)="close()" aria-label="Đóng">&times;</button>
+
+    <h3 class="subtitle">TẶNG MÃ GIẢM GIÁ</h3>
+    <div class="discount">10%</div>
+
+    <div class="coupon">
+      <div class="left">
+        <div class="label">Nhập mã</div>
+        <div class="code">WELCOME5</div>
+      </div>
+      <div class="right">
+        <div>Giảm tối đa <b>10%</b></div>
+        <small>áp dụng cho tất cả SP nguyên giá</small>
+      </div>
+    </div>
+
+    <p class="note">*Dành riêng cho khách hàng có đơn hàng trên 500.000</p>
+
+    <button class="cta" (click)="close()">MUA NGAY</button>
+  </div>
+</div>

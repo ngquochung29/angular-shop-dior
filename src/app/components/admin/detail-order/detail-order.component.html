@@ -4,7 +4,7 @@
   <div class="d-flex align-items-center justify-content-between bg-white border rounded-3 shadow-sm p-3 mb-3">
     <div class="d-flex align-items-center gap-2">
       <i class="fa-solid fa-file-invoice-dollar fs-3 text-primary"></i>
-      <h1 class="h5 m-0 fw-bold">Thông tin hóa đơn chi tiết</h1>
+      <h1 class="h5 m-0 fw-bold">Thông tin đơn hàng chi tiết</h1>
     </div>
 <span class="badge text-capitalize"
   [ngClass]="{
@@ -81,25 +81,34 @@
           <div class="small text-muted">Ngày nhận hàng</div>
           <div class="fw-semibold">{{ orderResponse.delivery_date | date:'dd/MM/yyyy' }}</div>
         </div>
-
-        <div class="col-sm-6">
-          <div class="small text-muted">Hình thức thanh toán</div>
-          <div class="fw-semibold">{{ orderResponse.payment_method }}</div>
-        </div>
-
+   <div class="col-sm-4">
+  <div class="small text-muted">Phương thức vận chuyển</div>
+  <div class="fw-semibold" [ngSwitch]="(orderResponse.shipping_method || '').toLowerCase()">
+    <span *ngSwitchCase="'counter'">Tại quầy</span>
+    <span *ngSwitchCase="'normal'">Giao hàng tiết kiệm</span>
+    <span *ngSwitchCase="'express'">Giao nhanh</span>
+    <span *ngSwitchDefault>{{ orderResponse.shipping_method }}</span>
+  </div>
+</div>
+        <div>
+  <span class="text-muted small">Hình thức thanh toán</span>
+  <div class="fw-semibold" [ngSwitch]="(orderResponse.payment_method || '').toLowerCase()">
+    <span *ngSwitchCase="'cod'">Thanh toán khi nhận hàng</span>
+    <span *ngSwitchCase="'money'">Tiền mặt</span>
+    <span *ngSwitchCase="'vnpay'">VNPay</span>
+    <span *ngSwitchDefault>{{ orderResponse.payment_method }}</span>
+  </div>
+</div>
         <div class="col-sm-6">
           <label for="statusSelect" class="form-label fw-semibold mb-1">Trạng thái</label>
           <select class="form-select" id="statusSelect" name="status" [(ngModel)]="orderResponse.status">
             <option value="pending">Chờ xác nhận</option>
             <option value="processing">Đã xác nhận</option>
-
             <option value="out_of_stock_pending">Hết hàng (chờ xác nhận)</option>
-            <option value="waiting_for_stock">Chờ sản phẩm</option>
-
+            <option value="waiting_for_stock">Chờ hàng về</option>
             <option value="shipped">Đang giao hàng</option>
             <option value="refused_on_delivery">Khách không nhận hàng</option>
             <option value="delivered">Đã nhận hàng</option>
-
             <option value="cancelled_out_of_stock">Hủy (Do hết hàng)</option>
             <option value="cancelled">Hủy đơn</option>
           </select>
@@ -127,7 +136,7 @@
           </thead>
           <tbody>
             <tr *ngFor="let order_detail of orderResponse.order_details; let i = index">
-              <!--
+<!--      
               <td>
                 <img [src]="order_detail.product.thumbnail" alt="thumbnail" width="64" height="64" class="rounded">
               </td>

@@ -1,0 +1,46 @@
+.category-page .page-heading { position: sticky; top: 0; z-index: 1029; }
+
+/* Bảng & sticky header */
+.table-sticky-wrap {
+  max-height: calc(100vh - 260px); /* chỉnh nếu header/toolbar cao hơn */
+  overflow: auto;
+}
+.table thead.sticky-top {
+  top: 0;
+  z-index: 1;
+  box-shadow: 0 2px 0 rgba(0,0,0,0.02);
+}
+.table tbody tr:hover {
+  background: rgba(13,110,253,.04);
+}
+
+/* Badge “mềm” cho trạng thái */
+.badge-soft-success {
+  background: rgba(25,135,84,.12);
+  color: #198754;
+  border-radius: 999px;
+  padding: .45rem .7rem;
+  font-weight: 600;
+  font-size: .8rem;
+}
+.badge-soft-danger {
+  background: rgba(220,53,69,.12);
+  color: #dc3545;
+  border-radius: 999px;
+  padding: .45rem .7rem;
+  font-weight: 600;
+  font-size: .8rem;
+}
+
+/* Truncate helper (đã set max-width inline) */
+.text-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Card bo tròn đẹp */
+.card { border-radius: 14px; overflow: hidden; }
+
+/* Nút: bỏ shadow gắt, gọn gàng hơn */
+.btn { box-shadow: none !important; }

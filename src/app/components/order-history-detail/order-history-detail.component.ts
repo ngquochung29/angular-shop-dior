@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { OrderResponse } from 'src/app/responses/order.response';
+import { OrderResponse } from 'src/app/responses/order/order.response';
 import { OrderService } from 'src/app/service/order.service';
 import { ToastService } from 'src/app/service/toast.service';
 
@@ -27,7 +27,7 @@ export class OrderHistoryDetailComponent implements OnInit {
    shipping_method: '',
    shipping_address: '',
    shipping_date: null,
-      delivery_date: null,
+   delivery_date: null,
    payment_method: '',
    order_details: [] = [],
  }
@@ -51,6 +51,7 @@ export class OrderHistoryDetailComponent implements OnInit {
   private calcShipping(method?: string): { fee: number; label: string } {
     const m = (method || '').toLowerCase();
     if (m === 'express') return { fee: 70_000, label: 'Giao hàng Nhanh' };
+       else if (m === 'counter') return { fee: 0, label: 'Thanh toán tại quầy' };
     return { fee: 35_000, label: 'Giao hàng Tiết Kiệm' }; // default
   }
    

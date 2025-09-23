@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { OrderResponse } from 'src/app/responses/order.response';
+import { OrderResponse } from 'src/app/responses/order/order.response';
 import { OrderService } from 'src/app/service/order.service';
 
 @Component({
@@ -13,7 +13,7 @@ export class ListOrdersEmployeeComponent implements OnInit {
 
   orders: OrderResponse[]=[];
   currentPage: number =0;
-  itemsPerPage: number =10;
+  itemsPerPage: number =12;
   pages: number[] = [];
   totalPages: number =0;
   keyword: string ="";
@@ -34,7 +34,7 @@ export class ListOrdersEmployeeComponent implements OnInit {
   }
   searchOrders() {
   this.currentPage =0;
-    this.itemsPerPage =10;
+    this.itemsPerPage =12;
       this.getAllOrders(this.keyword.trim(),this.currentPage,this.itemsPerPage);
 }
   

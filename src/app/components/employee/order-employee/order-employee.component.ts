@@ -59,7 +59,7 @@ shippingFee: number = 0;
     this.orderForm = this.formBuilder.group({
       fullname: ['khách lẻ'],
       email: ['diorshop@gmail.com'],
-      phone_number: ['1234567890'],
+      phone_number: ['0000000000'],
       address: ['Số 3, đường Trịnh Văn Bô, Nam Từ Liêm, Hà Nội'],
       shipping_address: ['mua hàng tại cửa hàng'],
       note: ['Đã thanh toán'],
@@ -321,7 +321,7 @@ private updateCartFromCartItems(): void {
             debugger;
             this.toastService.showToast({
               error: err,
-              defaultMsg: 'Thiếu hàng',
+              defaultMsg: 'Không thể đặt hàng',
               title: 'Lỗi Đặt Hàng',
             });
           },

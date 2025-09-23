@@ -29,3 +29,18 @@
 .order-table .table-active {
   background-color: #f8f9fa;
 }
+
+.order-info-grid {
+  display: grid;
+  grid-template-columns: 1fr;         /* mobile 1 cột */
+  gap: 16px;
+}
+@media (min-width: 768px) {
+  .order-info-grid {
+    grid-template-columns: 1fr 1fr;   /* >= md: 2 cột */
+    align-items: start;
+  }
+  .order-info-right {
+    padding-left: 16px;
+  }
+}

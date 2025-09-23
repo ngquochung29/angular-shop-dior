@@ -1,0 +1,36 @@
+  .form-container {
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 2rem;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+    max-width: 600px;
+    margin: auto;
+  }
+
+  .form-title {
+    color: #d63384;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+  }
+
+  .btn-primary {
+    background-color: #0d6efd;
+    border: none;
+    font-weight: 500;
+  }
+
+  .btn-primary:hover {
+    background-color: #0b5ed7;
+  }
+html, body {
+  height: 100%;
+}
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+app-footer {
+  margin-top: auto;
+}
+ 

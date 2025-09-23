@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { OrderResponse } from 'src/app/responses/order.response';
+import { OrderResponse } from 'src/app/responses/order/order.response';
 import { UserResponse } from 'src/app/responses/user/user.response';
 import { OrderService } from 'src/app/service/order.service';
 import { ToastService } from 'src/app/service/toast.service';

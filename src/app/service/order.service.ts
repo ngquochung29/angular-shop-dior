@@ -4,8 +4,8 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ApiResponse } from '../responses/api.response';
 import { OrderDTO } from '../dtos/order/order.dto';
-import { OrderResponse } from '../responses/order.response';
-import { OrderListResponse } from '../responses/order.list.response';
+import { OrderResponse } from '../responses/order/order.response';
+import { OrderListResponse } from '../responses/order/order.list.response';
 
 @Injectable({
   providedIn: 'root'
@@ -36,6 +36,39 @@ getAllOrders(
     .set('page', page.toString())
     .set('limit', limit.toString());
   return this.http.get<OrderListResponse>(`${this.apiUrl}/get-orders-by-keyword`, { params });
+}
+getAllBills(
+  keyword: string,
+  page: number,
+  limit: number
+): Observable<OrderListResponse> {
+  const params = new HttpParams()
+    .set('keyword', keyword)
+    .set('page', page.toString())
+    .set('limit', limit.toString());
+  return this.http.get<OrderListResponse>(`${this.apiUrl}/get-bills-by-keyword`, { params });
+}
+getAllBillsToCounter(
+  keyword: string,
+  page: number,
+  limit: number
+): Observable<OrderListResponse> {
+  const params = new HttpParams()
+    .set('keyword', keyword)
+    .set('page', page.toString())
+    .set('limit', limit.toString());
+  return this.http.get<OrderListResponse>(`${this.apiUrl}/counter/get-bills-by-keyword`, { params });
+}
+getAllBillsOnline(
+  keyword: string,
+  page: number,
+  limit: number
+): Observable<OrderListResponse> {
+  const params = new HttpParams()
+    .set('keyword', keyword)
+    .set('page', page.toString())
+    .set('limit', limit.toString());
+  return this.http.get<OrderListResponse>(`${this.apiUrl}/online/get-bills-by-keyword`, { params });
 }
 
 updateOrder(orderId: number,orderData: OrderDTO): Observable<any>{

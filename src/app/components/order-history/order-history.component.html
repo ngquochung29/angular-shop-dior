@@ -22,8 +22,6 @@
                         <th>Ngày đặt</th>
                         <th>Trạng thái</th>
                         <th>Tổng tiền</th>
-                        <th>Vận chuyển</th>
-                        <th>Thanh toán</th>
                         <th>Thao tác</th>
                       </tr>
                     </thead>
@@ -35,27 +33,29 @@
                         <td>{{ order.phone_number }}</td>
                         <td>{{ order.address }}</td>
                         <td>{{ order.order_date | date : "dd/MM/yyyy" }}</td>
-                        <td>
-                          <span class="badge"
-                     [ngClass]="{
-    'bg-secondary': order.status === 'pending',
-    'bg-primary': order.status === 'processing',
-
-    'bg-info': order.status === 'shipped' || order.status === 'shipping' || order.status === 'waiting_for_stock',
-    'bg-warning': order.status === 'out_of_stock_pending',
-    'text-dark': order.status === 'shipped' || order.status === 'shipping' || 
-                 order.status === 'waiting_for_stock' || order.status === 'out_of_stock_pending',
-
-    'bg-success': order.status === 'delivered',
-    'bg-danger': order.status === 'cancelled' || order.status === 'cancelled_out_of_stock',
-    'bg-dark': order.status === 'refused_on_delivery'
-  }">
-                            {{ order.status }}
-                          </span>
-                        </td>
+                   <td>
+                  <span class="badge status-badge" [ngClass]="{
+          'bg-secondary': order.status === 'pending',
+          'bg-primary': order.status === 'processing',
+          'bg-info': order.status === 'shipped' || order.status === 'shipping' || order.status === 'waiting_for_stock',
+          'bg-warning text-dark': order.status === 'out_of_stock_pending',
+          'bg-success': order.status === 'delivered',
+          'bg-danger': order.status === 'cancelled' || order.status === 'cancelled_out_of_stock',
+          'bg-dark': order.status === 'refused_on_delivery'
+        }" [ngSwitch]="(order.status || '').toLowerCase()">
+                    <ng-container *ngSwitchCase="'pending'">Chờ xác nhận</ng-container>
+                    <ng-container *ngSwitchCase="'processing'">Đã xác nhận</ng-container>
+                    <ng-container *ngSwitchCase="'shipped'">Đã gửi hàng</ng-container>
+                    <ng-container *ngSwitchCase="'waiting_for_stock'">Chờ nhập hàng</ng-container>
+                    <ng-container *ngSwitchCase="'out_of_stock_pending'">Tạm hết hàng</ng-container>
+                    <ng-container *ngSwitchCase="'delivered'">Đã nhận hàng</ng-container>
+                    <ng-container *ngSwitchCase="'cancelled'">Đã hủy</ng-container>
+                    <ng-container *ngSwitchCase="'cancelled_out_of_stock'">Hủy do hết hàng</ng-container>
+                    <ng-container *ngSwitchCase="'refused_on_delivery'">Từ chối nhận</ng-container>
+                    <ng-container *ngSwitchDefault>{{ order.status }}</ng-container>
+                  </span>
+                </td>
                         <td>{{ order.total_money | currency : "VND" : "symbol" }}</td>
-                        <td>{{ order.shipping_method }}</td>
-                        <td>{{ order.payment_method }}</td>
                         <td>
                           <button class="btn btn-outline-primary btn-sm" (click)="viewDetails(order)"
 >

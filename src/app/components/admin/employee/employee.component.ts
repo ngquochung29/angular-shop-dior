@@ -39,7 +39,11 @@ route = inject(ActivatedRoute);
     updateEmployee(userId: number){
     this.router.navigate(['/admin/employees/update',userId]);
   }
-  
+    roleLabels: Record<string, string> = {
+  ADMIN: 'Quản trị viên',
+  employee: 'Nhân viên',
+  user: 'Khách hàng'
+};
 
     searchUsers() {
     this.currentPage = 0;

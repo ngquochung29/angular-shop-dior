@@ -1,0 +1,57 @@
+/* Khung trang */
+.orders-page .page-heading { position: sticky; top: 0; z-index: 1029; }
+
+/* Ô tìm */
+.search-input {
+  box-shadow: none !important;
+}
+
+/* Bảng & sticky header */
+.table-sticky-wrap {
+  max-height: calc(100vh - 260px); /* chỉnh khi header/toolbar cao hơn */
+  overflow: auto;
+}
+.table thead.sticky-top {
+  top: 0;
+  z-index: 1;
+  box-shadow: 0 2px 0 rgba(0,0,0,0.02);
+}
+.table tbody tr:hover {
+  background: rgba(13,110,253,.04); /* hover dịu mắt */
+}
+
+/* Truncate helper (đã set inline max-width cho từng cột dài) */
+.text-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Badge trạng thái */
+.status-badge {
+  font-size: 0.78rem;
+  padding: .4rem .6rem;
+  border-radius: 999px; /* pill */
+}
+
+/* Pagination pill kiểu gọn */
+.pagination-pills .page-link {
+  border-radius: 999px !important;
+  margin: 0 .125rem;
+  padding: .35rem .7rem;
+  box-shadow: none;
+  cursor: pointer;
+}
+.pagination-pills .page-item.active .page-link {
+  background-color: #0d6efd;
+  border-color: #0d6efd;
+}
+
+/* Card */
+.card { border-radius: 14px; overflow: hidden; }
+.card-footer { border-top: 1px solid rgba(0,0,0,.05); }
+
+/* Responsive tinh chỉnh */
+@media (max-width: 992px) {
+  .table-sticky-wrap { max-height: calc(100vh - 300px); }
+}

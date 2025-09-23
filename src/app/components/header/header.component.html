@@ -40,6 +40,7 @@
     {{ brand.name }}
   </option>
 </select> 
+
 <a routerLink="/introduces" class="nav-link text-dark px-2 fw-medium">Về chúng tôi</a>
 
       <!-- Search -->
@@ -53,7 +54,9 @@
 
     <!-- Icons -->
     <div class="icons d-flex align-items-center ms-4 mt-4 mt-md-0 fs-5">
-      <i class="bi bi-heart me-4 icon-action" title="Yêu thích"></i>
+      <i class="bi bi-heart me-4 icon-action" title="Yêu thích"
+        routerLink="/favorites">
+      </i>
       <i class="bi bi-cart3 me-4 icon-action" title="Giỏ hàng" data-bs-toggle="offcanvas"
         data-bs-target="#cartSidebar" 
         routerLinkActive="active"

@@ -11,7 +11,7 @@
             <div class="card-body">
               <!-- Họ tên -->
               <div class="mb-3">
-                <label for="fullname" class="form-label">Họ và tên</label>
+                <label for="fullname" class="form-label">Người mua</label>
                 <div class="input-group">
                   <span class="input-group-text"><i class="fa-regular fa-id-card"></i></span>
                   <input
@@ -19,14 +19,14 @@
                     formControlName="fullname"
                     class="form-control"
                     id="fullname"
-                    placeholder="Họ và tên"
+                    placeholder="Người mua"
                   />
                 </div>
               </div>
 
               <!-- Email -->
               <div class="mb-3">
-                <label for="email" class="form-label">Email</label>
+                <label for="email" class="form-label">Email cửa hàng</label>
                 <div class="input-group">
                   <span class="input-group-text"><i class="fa-regular fa-envelope"></i></span>
                   <input
@@ -41,7 +41,7 @@
 
               <!-- Số điện thoại -->
               <div class="mb-3">
-                <label for="phone" class="form-label">Số điện thoại</label>
+                <label for="phone" class="form-label">Số điện thoại (nếu có)</label>
                 <div class="input-group">
                   <span class="input-group-text"><i class="fa-solid fa-phone"></i></span>
                   <input
@@ -57,7 +57,7 @@
 
               <!-- Địa chỉ -->
               <div class="mb-3">
-                <label for="address" class="form-label">Địa chỉ</label>
+                <label for="address" class="form-label">Địa chỉ cửa hàng</label>
                 <div class="input-group">
                   <span class="input-group-text"><i class="fa-solid fa-location-dot"></i></span>
                   <input
@@ -73,7 +73,7 @@
 
               <!-- Địa chỉ nhận -->
               <div class="mb-3">
-                <label for="shipping_address" class="form-label">Địa chỉ người nhận</label>
+                <label for="shipping_address" class="form-label">Hình thức mua hàng</label>
                 <div class="input-group">
                   <span class="input-group-text"><i class="fa-solid fa-house"></i></span>
                   <input
@@ -101,7 +101,7 @@
 
               <!-- Vận chuyển -->
               <div class="mb-3">
-                <label for="shippingMethod" class="form-label">Hình thức nhận hàng</label>
+                <label for="shippingMethod" class="form-label">Kiểu thanh toán</label>
                 <select class="form-select" id="shippingMethod" formControlName="shipping_method">
                   <option value="counter">Thanh toán tại quầy</option>
                 </select>

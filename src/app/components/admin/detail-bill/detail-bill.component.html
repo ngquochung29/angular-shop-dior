@@ -1,0 +1,142 @@
+<div class="container my-3">
+
+  <!-- Tiêu đề + trạng thái -->
+  <div class="card border-0 shadow-sm rounded-3 mb-3">
+    <div class="card-body d-flex justify-content-between align-items-center">
+      <div class="d-flex align-items-center gap-2">
+        <i class="fa-solid fa-file-invoice-dollar fs-3 text-primary"></i>
+        <h1 class="h5 m-0 fw-bold">Thông tin hoá đơn chi tiết</h1>
+      </div>
+  <div class="fw-semibold" [ngSwitch]="orderResponse.status">
+    <span *ngSwitchCase="'pending'">Chờ xác nhận</span>
+    <span *ngSwitchCase="'processing'">Đã xác nhận</span>
+    <span *ngSwitchCase="'shipped'">Đã gửi hàng</span>
+    <span *ngSwitchCase="'waiting_for_stock'">Chờ nhập hàng</span>
+    <span *ngSwitchCase="'out_of_stock_pending'">Tạm hết hàng</span>
+    <span *ngSwitchCase="'delivered'">Đã nhận hàng</span>
+    <span *ngSwitchCase="'cancelled'">Đã hủy</span>
+    <span *ngSwitchCase="'cancelled_out_of_stock'">Hủy do hết hàng</span>
+    <span *ngSwitchCase="'refused_on_delivery'">Từ chối nhận</span>
+    <span *ngSwitchDefault>{{ orderResponse.status | titlecase }}</span>
+  </div>
+    </div>
+  </div>
+
+  <!-- Thông tin hóa đơn (dọc) -->
+  <div class="card border-0 shadow-sm rounded-3 mb-3">
+    <div class="card-header bg-light fw-semibold">Đơn hàng</div>
+    <div class="card-body">
+      <div class="vstack gap-2">
+        <div><span class="text-muted small">ID hóa đơn</span><div class="fw-semibold">{{ orderResponse.id }}</div></div>
+        <div><span class="text-muted small">ID tài khoản</span><div class="fw-semibold">{{ orderResponse.user_id }}</div></div>
+        <div><span class="text-muted small">Tên khách hàng</span><div class="fw-semibold">{{ orderResponse.fullname }}</div></div>
+        <div><span class="text-muted small">Số điện thoại</span><div class="fw-semibold">{{ orderResponse.phone_number }}</div></div>
+        <div><span class="text-muted small">Email</span><div class="fw-semibold">{{ orderResponse.email }}</div></div>
+        <div><span class="text-muted small">Địa chỉ</span><div class="fw-semibold">{{ orderResponse.address }}</div></div>
+        <div><span class="text-muted small">Ghi chú</span><div class="fw-semibold">{{ orderResponse.note }}</div></div>
+        <div class="d-flex gap-3 flex-wrap">
+          <div>
+            <span class="text-muted small">Ngày đặt hàng</span>
+            <div class="fw-semibold">{{ orderResponse.order_date | date:'dd/MM/yyyy' }}</div>
+          </div>
+          <div>
+            <span class="text-muted small">Ngày gửi hàng</span>
+            <div class="fw-semibold">{{ orderResponse.shipping_date | date:'dd/MM/yyyy' }}</div>
+          </div>
+          <div>
+            <span class="text-muted small">Ngày nhận hàng</span>
+            <div class="fw-semibold">{{ orderResponse.delivery_date | date:'dd/MM/yyyy' }}</div>
+          </div>
+        </div>
+<div>
+  <span class="text-muted small">Hình thức thanh toán</span>
+  <div class="fw-semibold" [ngSwitch]="(orderResponse.payment_method || '').toLowerCase()">
+    <span *ngSwitchCase="'cod'">Thanh toán khi nhận hàng</span>
+    <span *ngSwitchCase="'money'">Tiền mặt</span>
+    <span *ngSwitchCase="'vnpay'">VNPay</span>
+    <span *ngSwitchDefault>{{ orderResponse.payment_method }}</span>
+  </div>
+</div>
+
+<div>
+  <span class="text-muted small">Trạng thái</span>
+  <div class="fw-semibold" [ngSwitch]="orderResponse.status">
+    <span *ngSwitchCase="'pending'">Chờ xác nhận</span>
+    <span *ngSwitchCase="'processing'">Đang xử lý</span>
+    <span *ngSwitchCase="'shipped'">Đã gửi hàng</span>
+    <span *ngSwitchCase="'shipping'">Đang giao</span>
+    <span *ngSwitchCase="'waiting_for_stock'">Chờ nhập hàng</span>
+    <span *ngSwitchCase="'out_of_stock_pending'">Tạm hết hàng</span>
+    <span *ngSwitchCase="'delivered'">Đã nhận hàng</span>
+    <span *ngSwitchCase="'cancelled'">Đã hủy</span>
+    <span *ngSwitchCase="'cancelled_out_of_stock'">Hủy do hết hàng</span>
+    <span *ngSwitchCase="'refused_on_delivery'">Từ chối nhận</span>
+    <span *ngSwitchDefault>{{ orderResponse.status | titlecase }}</span>
+  </div>
+</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Danh sách sản phẩm (xếp dọc) -->
+  <div class="card border-0 shadow-sm rounded-3 mb-3">
+    <div class="card-header bg-light fw-semibold">Đơn hàng</div>
+    <div class="card-body">
+      <div class="vstack gap-2">
+        <div
+          class="border rounded p-2 d-flex flex-column flex-md-row align-items-md-center justify-content-between"
+          *ngFor="let order_detail of orderResponse.order_details; let i = index"
+        >
+          <div class="me-md-3">
+            <div class="fw-semibold">{{ order_detail.product_name }}</div>
+            <div class="small text-muted">Kích thước: {{ order_detail.size }} · Màu: {{ order_detail.color }}</div>
+          </div>
+
+          <div class="d-flex gap-4 mt-2 mt-md-0">
+            <div class="text-end">
+              <div class="small text-muted">Giá</div>
+              <div class="fw-semibold">{{ order_detail.price | currency:'VND':'symbol' }}</div>
+            </div>
+            <div class="text-center">
+              <div class="small text-muted">Số lượng</div>
+              <div class="fw-semibold">{{ order_detail.number_of_products }}</div>
+            </div>
+            <div class="text-end">
+              <div class="small text-muted">Tổng</div>
+              <div class="fw-bold">{{ order_detail.price*order_detail.number_of_products | number }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tổng hợp (xếp dọc) -->
+  <div class="card border-0 shadow-sm rounded-3 mb-3">
+    <div class="card-body">
+      <div class="d-flex justify-content-between py-1">
+        <span class="text-muted">Tổng giá</span>
+        <span class="fw-semibold">{{ totalOriginMoney | currency:'VND':'symbol' }}</span>
+      </div>
+      <div class="d-flex justify-content-between py-1">
+        <span class="text-muted">Phí vận chuyển</span>
+        <span class="fw-semibold">{{ shippingFee | currency:'VND':'symbol':'1.0-0' }}</span>
+      </div>
+      <div class="d-flex justify-content-between py-1">
+        <span class="text-muted">Khuyến mãi</span>
+        <span class="fw-semibold">{{ couponMoney | currency:'VND':'symbol' }}</span>
+      </div>
+      <hr class="my-2">
+      <div class="d-flex justify-content-between align-items-center">
+        <span class="fw-bold">Tổng giá (đã áp dụng voicher)</span>
+        <span class="h5 m-0 fw-bold text-primary">{{ orderResponse.total_money | currency:'VND':'symbol' }}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Nút in -->
+  <!-- <div class="text-end">
+    <button class="btn btn-primary px-4" (click)="saveOrder()">Save</button>
+  </div> -->
+
+</div>

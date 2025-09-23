@@ -15,7 +15,6 @@
     <option *ngFor="let y of years" [value]="y">{{ y }}</option>
   </select>
 </div>
-
   <!-- <small class="text-muted">Chọn năm cần thống kê</small> -->
 </div>
 <button class="btn btn-outline-secondary rounded-0 border-0" (click)="loadAll()" aria-label="Làm mới" title="Làm mới">
@@ -48,19 +47,37 @@
 
 <!-- Panels -->
 <div class="panel two-cols" *ngIf="!loading && !error">
-  <!-- Doanh thu 12 tháng -->
-  <div class="panel-section">
-    <div class="panel-title">Doanh thu theo tháng</div>
-    <div class="bars">
-      <div class="bar-row" *ngFor="let t of totals; let i = index">
-        <div class="bar-label">{{ monthLabels[i] }}</div>
-        <div class="bar-track">
-          <div class="bar-fill" [style.width]="widthPercent(t)"></div>
+<!-- Doanh thu 12 tháng (Vertical Bars, không đụng TS) -->
+<!-- Doanh thu 12 tháng (Vertical Bars dùng widthPercent) -->
+<div class="panel-section">
+  <div class="panel-title">Doanh thu theo tháng</div>
+
+  <div class="vchart">
+    <!-- Trục Y (thước đo) -->
+    <div class="vchart-y">
+      <div class="tick"><span>100%</span></div>
+      <div class="tick"><span>75%</span></div>
+      <div class="tick"><span>50%</span></div>
+      <div class="tick"><span>25%</span></div>
+      <div class="tick"><span>0%</span></div>
+    </div>
+    <!-- Khu vực cột -->
+    <div class="vchart-plot">
+      <div class="grid-lines"></div>
+
+      <div class="vcols">
+        <div class="vcol" *ngFor="let t of totals; let i = index">
+          <!-- chiều cao cột dựa trên widthPercent(t) từ TS của bạn -->
+          <div class="bar" [style.height]="widthPercent(t)" title="{{ money(t) }}">
+            <div class="bar-value">{{ money(t) }}</div>
+          </div>
+          <div class="vcol-label">{{ monthLabels[i] }}</div>
         </div>
-        <div class="bar-value">{{ money(t) }}</div>
       </div>
     </div>
   </div>
+</div>
+
 
   <!-- Cơ cấu user -->
   <div class="panel-section">
@@ -85,8 +102,8 @@
 </div>
 
 <!-- Bảng chi tiết -->
-<table class="table" *ngIf="!loading && !error">
-  <thead>
+<!-- <table class="table" *ngIf="!loading && !error"> -->
+  <!-- <thead>
     <tr>
       <th>Tháng</th>
       <th>Doanh thu</th>
@@ -100,5 +117,5 @@
       <td>{{ money(cumTotals[i]) }}</td>
     </tr>
   </tbody>
-</table>
+</table> -->
 </div>
