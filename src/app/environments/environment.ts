@@ -1,4 +1,4 @@
 export const environment ={
     production: false,
-    apiBaseUrl:'http://localhost:8080'
+    apiBaseUrl:'https://fashionshop-service-378832852436.asia-southeast1.run.app'
 }
