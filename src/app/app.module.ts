@@ -27,6 +27,10 @@ import { ContacComponent } from './components/contac/contac.component';
 import { IntroducesComponent } from './components/introduces/introduces.component';
 import { FavoriteComponent } from './components/favorite/favorite.component';
 import { PromoModalComponent } from './components/promo-modal/promo-modal.component';
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {NgxSpinnerModule} from "ngx-spinner";
+import {LoadingInterceptor} from "./app/loading.interceptor";
+import {LoadingSpinnerComponent} from "./app/loading-spinner.component";
 
 
 
@@ -51,6 +55,7 @@ import { PromoModalComponent } from './components/promo-modal/promo-modal.compon
        IntroducesComponent,
        FavoriteComponent,
        PromoModalComponent,
+    LoadingSpinnerComponent
   ],
   imports: [
         BrowserModule,
@@ -61,14 +66,17 @@ import { PromoModalComponent } from './components/promo-modal/promo-modal.compon
     AppRoutingModule,
     NgbModule,
     AdminModule,
-    EmployeeModule
+    EmployeeModule,
+    BrowserAnimationsModule,  // bắt buộc để spinner chạy animation
+    NgxSpinnerModule.forRoot({ type: 'ball-spin-clockwise' }) // chọn style spinner
   ],
   providers: [
     {
     provide:HTTP_INTERCEPTORS,
     useClass: TokenInterceptor,
     multi:true,
-  }
+  },
+    { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })
