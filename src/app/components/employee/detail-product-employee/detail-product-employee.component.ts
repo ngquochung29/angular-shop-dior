@@ -48,11 +48,11 @@ export class DetailProductEmployeeComponent implements OnInit {
          .subscribe({
            next: (response: any) => {
              // Map full image URLs
-             if (response.product_images) {
-               response.product_images.forEach((productImages: ProductImage) => {
-                 productImages.image_url = `${environment.apiBaseUrl}/api/v1/products/images/${productImages.image_url}`;
-               });
-             }
+             // if (response.product_images) {
+             //   response.product_images.forEach((productImages: ProductImage) => {
+             //     productImages.image_url = `${environment.apiBaseUrl}/api/v1/products/images/${productImages.image_url}`;
+             //   });
+             // }
              this.product = response;
 
              // Use returned product_details (already filtered quantity > 0)

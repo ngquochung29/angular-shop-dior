@@ -123,9 +123,6 @@ export class UpdateProductAdminComponent implements OnInit {
       next: (product: Product) => {
         this.product = product;
         this.updatedProduct = { ...product };
-        this.updatedProduct.product_images.forEach((product_image:ProductImage) => {
-          product_image.image_url = `${environment.apiBaseUrl}/api/v1/products/images/${product_image.image_url}?v=${Date.now()}`;
-        });
       },
       complete: () => {
 

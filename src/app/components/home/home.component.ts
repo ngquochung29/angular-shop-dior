@@ -91,10 +91,8 @@ export class HomeComponent implements OnInit {
   getProducts(keyword: string, selectedCategoryId: number, page: number, limit: number){
     this.productService.getProductsByActive(keyword,selectedCategoryId,page,limit).subscribe({
       next:(response:any)=>{
-        debugger
         response.products.forEach((product: Product)=>{
-          debugger
-          product.url=`${environment.apiBaseUrl}/api/v1/products/images/${product.thumbnail}`;
+          product.url=product.thumbnail
         });
         this.products = response.products;
         this.totalPages = response.totalPages;
