@@ -4,7 +4,7 @@ WORKDIR /app
 
 # Copy package files và cài dependencies
 COPY package*.json ./
-RUN npm install --legacy-peer-deps
+RUN npm install
 
 # Copy toàn bộ source code và build Angular (theo cấu hình production mặc định)
 COPY . .
