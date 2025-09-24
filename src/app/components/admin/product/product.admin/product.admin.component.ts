@@ -49,7 +49,7 @@ export class ProductAdminComponent implements OnInit {
       next:(response: any)=>{
         response.products.forEach((product: Product)=>{
           if(product){
-            product.url =`${environment.apiBaseUrl}/api/v1/products/images/${product.thumbnail}`;
+            product.url =product.thumbnail
           }
         });
         this.products = response.products;

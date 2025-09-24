@@ -169,7 +169,7 @@ loadProductByCategory() {
       // Lấy mảng sản phẩm (chuẩn Spring Data Page là 'content')
       const products = response.content || [];
       products.forEach((product: Product) => {
-        product.url = `${environment.apiBaseUrl}/api/v1/products/images/${product.thumbnail}`;
+        product.url =product.thumbnail
       });
       this.products = products;
       this.totalPages = response.totalPages;
@@ -186,7 +186,7 @@ loadProductByStyle() {
       // Lấy mảng sản phẩm (chuẩn Spring Data Page là 'content')
       const products = response.content || [];
       products.forEach((product: Product) => {
-        product.url = `${environment.apiBaseUrl}/api/v1/products/images/${product.thumbnail}`;
+        product.url =product.thumbnail
       });
       this.products = products;
       this.totalPages = response.totalPages;
@@ -203,7 +203,7 @@ loadProductByBrand() {
       // Lấy mảng sản phẩm (chuẩn Spring Data Page là 'content')
       const products = response.content || [];
       products.forEach((product: Product) => {
-        product.url = `${environment.apiBaseUrl}/api/v1/products/images/${product.thumbnail}`;
+        product.url =product.thumbnail
       });
       this.products = products;
       this.totalPages = response.totalPages;
@@ -220,7 +220,7 @@ searchByKeyword() {
       // Lấy mảng sản phẩm (chuẩn Spring Data Page là 'content')
       const products = response.content || [];
       products.forEach((product: Product) => {
-        product.url = `${environment.apiBaseUrl}/api/v1/products/images/${product.thumbnail}`;
+        product.url =product.thumbnail
       });
       this.products = products;
       this.totalPages = response.totalPages;
