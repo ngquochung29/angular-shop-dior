@@ -27,8 +27,7 @@ import { ContacComponent } from './components/contac/contac.component';
 import { IntroducesComponent } from './components/introduces/introduces.component';
 import { FavoriteComponent } from './components/favorite/favorite.component';
 import { PromoModalComponent } from './components/promo-modal/promo-modal.component';
-import { NgxSpinnerModule } from "ngx-spinner";
-import {LoadingInterceptor} from "./app/loading.interceptor";
+
 
 
 
@@ -62,20 +61,14 @@ import {LoadingInterceptor} from "./app/loading.interceptor";
     AppRoutingModule,
     NgbModule,
     AdminModule,
-    EmployeeModule,
-    NgxSpinnerModule
+    EmployeeModule
   ],
   providers: [
     {
     provide:HTTP_INTERCEPTORS,
     useClass: TokenInterceptor,
     multi:true,
-  },
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: LoadingInterceptor,
-      multi: true
-    }
+  }
   ],
   bootstrap: [AppComponent]
 })
